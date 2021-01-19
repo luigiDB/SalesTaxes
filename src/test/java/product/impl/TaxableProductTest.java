@@ -5,9 +5,10 @@ import product.strategy.ITaxingStrategy;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TaxableProductTest {
+
+public class TaxableProductTest {
 
     private static final String PRODUCT_NAME = "productName";
     private static final BigDecimal TWO = BigDecimal.valueOf(2L);
