@@ -11,7 +11,7 @@
           with:
             java-version: 1.11
         - name: Maven tests
-          run: mvn surefire-report:report
+          run: mvn --batch-mode surefire-report:report verify
         - name: Publish test results
           uses: actions/upload-artifact@v1
           with:
