@@ -1,7 +1,6 @@
 package receipt.impl;
 
 
-import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import receipt.IReceiptProduct;

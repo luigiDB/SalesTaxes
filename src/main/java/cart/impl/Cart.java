@@ -2,9 +2,8 @@ package cart.impl;
 
 import cart.ICart;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
-import receipt.IReceipt;
 import product.ITaxableProduct;
+import receipt.IReceipt;
 import receipt.IReceiptProduct;
 import receipt.impl.Receipt;
 import receipt.impl.ReceiptProduct;

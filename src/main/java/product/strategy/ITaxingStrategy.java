@@ -6,6 +6,7 @@ public interface ITaxingStrategy {
 
     /**
      * Evaluates the taxes over the provided amount
+     *
      * @param price The price
      * @return the taxes amount
      */

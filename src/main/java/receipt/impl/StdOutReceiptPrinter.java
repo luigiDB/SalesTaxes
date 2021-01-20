@@ -1,6 +1,5 @@
 package receipt.impl;
 
-import org.apache.commons.lang3.tuple.Triple;
 import receipt.IReceipt;
 import receipt.IReceiptPrinter;
 import receipt.IReceiptProduct;
@@ -16,7 +15,7 @@ public class StdOutReceiptPrinter implements IReceiptPrinter {
 
     @Override
     public void print(IReceipt receipt) {
-        for (IReceiptProduct item: receipt.billedItems()) {
+        for (IReceiptProduct item : receipt.billedItems()) {
             System.out.printf("%d \t%s: \t%s%s",
                     item.getQuantity(),
                     item.getProduct(),
