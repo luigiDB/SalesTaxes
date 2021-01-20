@@ -1,0 +1,92 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+ITaxableProduct <|-- TaxableProduct
+TaxableProduct o-- ITaxingStrategy
+ITaxingStrategy <|-- NoTaxStrategy
+ITaxingStrategy <|-- RoundedPercentageStrategy
+
+ICart <|-- Cart
+ICart o-- ITaxableProduct
+ICart <-- IReceipt
+IReceiptPrinter <-- IReceipt
+IReceiptPrinter <|-- ReceiptPrinter
+IReceipt <|-- Receipt
+IReceiptProduct <|-- ReceiptProduct
+
+IReceipt *-- IReceiptProduct
+ReceiptPrinter <-- IReceiptProduct
+
+interface ITaxableProduct {
+    getProduct()
+    getPrice()
+    getTaxedPrice()
+    gettaxes()
+}
+
+class TaxableProduct {
+    String product
+    BigDecimal price
+    ITaxingStrategy taxingStrategy
+    ITaxingStrategy importTaxStrategy
+    getProduct()
+    getPrice()
+    getTaxedPrice()
+    gettaxes()
+}
+
+interface ICart {
+    void add(ITaxableProduct, Integer)
+    IReceipt bill()
+}
+
+class Cart {
+    void add(ITaxableProduct, Integer)
+    IReceipt bill()
+}
+
+interface IReceipt {
+    List<IReceiptProduct> billedItems()
+    BigDecimal getTotal()
+    BigDecimal getTaxes()
+}
+
+class Receipt {
+    List<IReceiptProduct> billedItems()
+    BigDecimal getTotal()
+    BigDecimal getTaxes()
+}
+
+interface ITaxingStrategy {
+    getTaxes(BigDecimal)
+}
+
+class NoTaxStrategy {
+    getTaxes(BigDecimal)
+}
+
+class RoundedPercentageStrategy {
+    getTaxes(BigDecimal)
+}
+
+interface IReceiptPrinter {
+    print(IReceipt)
+}
+
+class ReceiptPrinter {
+    print(IReceipt)
+}
+
+interface IReceiptProduct {
+    String getProduct()
+    int getQuantity()
+    BigDecimal getPrice()
+}
+
+class ReceiptProduct {
+    String getProduct()
+    int getQuantity()
+    BigDecimal getPrice()
+}
+
+@enduml
