@@ -1,5 +1,6 @@
 package receipt.impl;
 
+import com.google.common.testing.EqualsTester;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import product.impl.TaxableProduct;
@@ -7,6 +8,7 @@ import product.impl.TaxableProduct;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ReceiptProductTest {
 
@@ -35,5 +37,15 @@ class ReceiptProductTest {
     @Test
     void getPrice() {
         assertEquals(BigDecimal.valueOf(420L), receiptProduct.getPrice());
+    }
+
+    @Test
+    void testEquals() {
+        new EqualsTester()
+                .addEqualityGroup(receiptProduct)
+                .testEquals();
+        assertFalse(receiptProduct.equals(new ReceiptProduct("product2", 42, BigDecimal.valueOf(420L))));
+        assertFalse(receiptProduct.equals(new ReceiptProduct("product", 4242, BigDecimal.valueOf(420L))));
+        assertFalse(receiptProduct.equals(new ReceiptProduct("product", 42, BigDecimal.valueOf(42L))));
     }
 }
