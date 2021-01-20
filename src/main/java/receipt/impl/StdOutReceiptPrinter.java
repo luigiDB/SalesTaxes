@@ -11,11 +11,11 @@ import java.util.Locale;
 
 public class StdOutReceiptPrinter implements IReceiptPrinter {
 
-    private String newLine = System.getProperty("line.separator");
+    private final String newLine = System.getProperty("line.separator");
 
     @Override
     public void print(IReceipt receipt) {
-        for (Triple<String, Integer, BigDecimal> item: receipt.getCartContent()) {
+        for (Triple<String, Integer, BigDecimal> item: receipt.billedItems()) {
             System.out.printf("%d \t%s: \t%s%s",
                     item.getMiddle(),
                     item.getLeft(),

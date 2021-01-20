@@ -18,7 +18,7 @@ public class Receipt implements IReceipt {
     }
 
     @Override
-    public List<Triple<String, Integer, BigDecimal>> getCartContent() {
+    public List<Triple<String, Integer, BigDecimal>> billedItems() {
         return cartProducts;
     }
 

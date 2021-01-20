@@ -32,7 +32,7 @@ class ReceiptTest {
     @Test
     void testThatAllProductsAndQuantitiesArePresent() {
         assertThat("cart equality without order",
-                receipt.getCartContent(), containsInAnyOrder(PRODUCT_1, PRODUCT_2));
+                receipt.billedItems(), containsInAnyOrder(PRODUCT_1, PRODUCT_2));
     }
 
     @Test

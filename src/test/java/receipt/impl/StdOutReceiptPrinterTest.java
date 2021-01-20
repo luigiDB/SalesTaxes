@@ -44,7 +44,7 @@ class StdOutReceiptPrinterTest {
         );
 
         IReceipt receipt = mock(IReceipt.class);
-        when(receipt.getCartContent()).thenReturn(List.of(
+        when(receipt.billedItems()).thenReturn(List.of(
                 Triple.of("book", 1, BigDecimal.valueOf(12.49)),
                 Triple.of("imported chocolate", 2, BigDecimal.valueOf(1.70))
         ));
