@@ -1,7 +1,6 @@
 package receipt.impl;
 
-import org.apache.commons.lang3.tuple.Pair;
-import product.ITaxableProduct;
+import cart.IBilledProduct;
 import receipt.IReceipt;
 import receipt.IReceiptProduct;
 
@@ -14,10 +13,10 @@ public class Receipt implements IReceipt {
     private final BigDecimal total;
     private final BigDecimal taxes;
 
-    public Receipt(List<Pair<ITaxableProduct, Integer>> items, BigDecimal total, BigDecimal taxes) {
+    public Receipt(List<IBilledProduct> items, BigDecimal total, BigDecimal taxes) {
         this.cartProducts = items
                 .stream()
-                .map(product -> ReceiptProduct.from(product.getLeft(), product.getRight()))
+                .map(ReceiptProduct::from)
                 .collect(Collectors.toList());
         this.total = total;
         this.taxes = taxes;

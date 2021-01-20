@@ -11,7 +11,7 @@ public interface ICart {
      * @param product  a product instance
      * @param quantity the quantity of the product
      */
-    void add(ITaxableProduct product, Integer quantity);
+    void add(ITaxableProduct product, int quantity);
 
     /**
      * return the cart receipt

@@ -1,6 +1,6 @@
 package receipt.impl;
 
-import product.ITaxableProduct;
+import cart.IBilledProduct;
 import receipt.IReceiptProduct;
 
 import java.math.BigDecimal;
@@ -11,10 +11,10 @@ public class ReceiptProduct implements IReceiptProduct {
     private final int quantity;
     private final BigDecimal price;
 
-    public static IReceiptProduct from(ITaxableProduct product, int quantity) {
-        return new ReceiptProduct(product.getProduct(),
-                quantity,
-                product.getTaxedPrice().multiply(BigDecimal.valueOf(quantity)));
+    public static IReceiptProduct from(IBilledProduct product) {
+        return new ReceiptProduct(product.getProduct().getProduct(),
+                product.getQuantity(),
+                product.getProduct().getTaxedPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
     }
 
     public ReceiptProduct(String product, int quantity, BigDecimal price) {

@@ -1,7 +1,8 @@
 package receipt.impl;
 
 
-import org.apache.commons.lang3.tuple.Pair;
+import cart.IBilledProduct;
+import cart.impl.BilledProduct;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import product.ITaxableProduct;
@@ -23,9 +24,9 @@ class ReceiptTest {
 
     @BeforeEach
     void setUp() {
-        List<Pair<ITaxableProduct, Integer>> cartItems = List.of(
-                Pair.of(initProduct("product1"), 1),
-                Pair.of(initProduct("product2"), 2)
+        List<IBilledProduct> cartItems = List.of(
+                new BilledProduct(initProduct("product1"), 1),
+                new BilledProduct(initProduct("product2"), 2)
         );
         receipt = new Receipt(cartItems, TOTAL, TAXES);
     }
