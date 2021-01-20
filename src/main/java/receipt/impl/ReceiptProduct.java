@@ -1,7 +1,5 @@
 package receipt.impl;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import product.ITaxableProduct;
 import receipt.IReceiptProduct;
 
@@ -50,7 +48,7 @@ public class ReceiptProduct implements IReceiptProduct {
 
         if (quantity != that.quantity) return false;
         if (!product.equals(that.product)) return false;
-        return price.compareTo(that.price)==0;
+        return price.compareTo(that.price) == 0;
     }
 
     @Override

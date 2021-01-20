@@ -31,7 +31,7 @@ public class StdOutReceiptPrinter implements IReceiptPrinter {
     }
 
     private static String formatBigDecimal(BigDecimal number) {
-        DecimalFormat df = new DecimalFormat("#,####.00");
+        DecimalFormat df = new DecimalFormat("#,###0.00");
         df.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ENGLISH));
         return df.format(number);
     }
