@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 
 public class ReceiptProduct implements IReceiptProduct {
 
-    private String product;
-    private int quantity;
-    private BigDecimal price;
+    private final String product;
+    private final int quantity;
+    private final BigDecimal price;
 
     public static IReceiptProduct from(ITaxableProduct product, int quantity) {
         return new ReceiptProduct(product.getProduct(),

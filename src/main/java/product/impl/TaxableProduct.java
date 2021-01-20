@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 
 public class TaxableProduct implements ITaxableProduct {
 
-    private String product;
-    private BigDecimal price;
-    private ITaxingStrategy taxingStrategy;
-    private ITaxingStrategy importTaxStrategy;
+    private final String product;
+    private final BigDecimal price;
+    private final ITaxingStrategy taxingStrategy;
+    private final ITaxingStrategy importTaxStrategy;
 
     public TaxableProduct(String product, BigDecimal price, ITaxingStrategy taxingStrategy, ITaxingStrategy importTaxStrategy) {
         this.product = product;

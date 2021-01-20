@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Cart implements ICart {
 
-    List<Pair<ITaxableProduct, Integer>> cart;
+    private final List<Pair<ITaxableProduct, Integer>> cart;
     private BigDecimal taxes;
     private BigDecimal total;
 

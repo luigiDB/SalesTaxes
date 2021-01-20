@@ -17,10 +17,10 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class E2eTest {
+class E2eTest {
 
-    private final BigDecimal FIVE = BigDecimal.valueOf(5L);
-    private final BigDecimal TEN = BigDecimal.TEN;
+    private final static BigDecimal FIVE = BigDecimal.valueOf(5L);
+    private final static BigDecimal TEN = BigDecimal.TEN;
     private Cart cart;
     private IReceiptPrinter printer;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -101,4 +101,5 @@ public class E2eTest {
 
         assertEquals(expectedOutput, outContent.toString());
     }
+
 }

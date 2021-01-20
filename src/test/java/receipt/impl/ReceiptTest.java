@@ -17,8 +17,8 @@ import static org.mockito.Mockito.when;
 
 class ReceiptTest {
 
-    private final BigDecimal TOTAL = BigDecimal.valueOf(11L);
-    private final BigDecimal TAXES = BigDecimal.ONE;
+    private final static BigDecimal TOTAL = BigDecimal.valueOf(11L);
+    private final static BigDecimal TAXES = BigDecimal.ONE;
     private Receipt receipt;
 
     @BeforeEach

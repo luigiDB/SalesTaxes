@@ -11,7 +11,7 @@ import java.util.Locale;
 
 public class StdOutReceiptPrinter implements IReceiptPrinter {
 
-    private final String newLine = System.getProperty("line.separator");
+    private static final String NEW_LINE = System.getProperty("line.separator");
 
     @Override
     public void print(IReceipt receipt) {
@@ -20,14 +20,14 @@ public class StdOutReceiptPrinter implements IReceiptPrinter {
                     item.getQuantity(),
                     item.getProduct(),
                     formatBigDecimal(item.getPrice()),
-                    newLine);
+                    NEW_LINE);
         }
         System.out.printf("Sales Taxes: %s%s",
                 formatBigDecimal(receipt.getTaxes()),
-                newLine);
+                NEW_LINE);
         System.out.printf("Total: %s%s",
                 formatBigDecimal(receipt.getTotal()),
-                newLine);
+                NEW_LINE);
     }
 
     private static String formatBigDecimal(BigDecimal number) {

@@ -14,8 +14,8 @@ public class Receipt implements IReceipt {
     private final BigDecimal total;
     private final BigDecimal taxes;
 
-    public Receipt(List<Pair<ITaxableProduct, Integer>> cart, BigDecimal total, BigDecimal taxes) {
-        this.cartProducts = cart
+    public Receipt(List<Pair<ITaxableProduct, Integer>> items, BigDecimal total, BigDecimal taxes) {
+        this.cartProducts = items
                 .stream()
                 .map(product -> ReceiptProduct.from(product.getLeft(), product.getRight()))
                 .collect(Collectors.toList());

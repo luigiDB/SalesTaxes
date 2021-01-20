@@ -16,8 +16,8 @@ import static org.mockito.Mockito.when;
 
 class CartTest {
 
-    private final BigDecimal TWENTY = BigDecimal.valueOf(20L);
-    private final BigDecimal TWO = BigDecimal.valueOf(2L);
+    private final static BigDecimal TWENTY = BigDecimal.valueOf(20L);
+    private final static BigDecimal TWO = BigDecimal.valueOf(2L);
     private Cart cart;
 
     @BeforeEach
@@ -34,7 +34,6 @@ class CartTest {
         assertTrue(bill.billedItems().isEmpty());
     }
 
-
     @Test
     void testThatTheBillForOneItemIsCorrectlyEvaluated() {
         ITaxableProduct product = createTaxableProduct("product1");
@@ -44,14 +43,6 @@ class CartTest {
         assertThat(BigDecimal.TEN, comparesEqualTo(bill.getTotal()));
         assertThat(BigDecimal.ONE, comparesEqualTo(bill.getTaxes()));
         assertFalse(bill.billedItems().isEmpty());
-    }
-
-    private ITaxableProduct createTaxableProduct(String name) {
-        ITaxableProduct product = mock(ITaxableProduct.class);
-        when(product.getProduct()).thenReturn(name);
-        when(product.getTaxes()).thenReturn(BigDecimal.ONE);
-        when(product.getTaxedPrice()).thenReturn(BigDecimal.TEN);
-        return product;
     }
 
     @Test
@@ -76,5 +67,13 @@ class CartTest {
         assertThat(TWENTY, comparesEqualTo(bill.getTotal()));
         assertThat(TWO, comparesEqualTo(bill.getTaxes()));
         assertFalse(bill.billedItems().isEmpty());
+    }
+
+    private ITaxableProduct createTaxableProduct(String name) {
+        ITaxableProduct product = mock(ITaxableProduct.class);
+        when(product.getProduct()).thenReturn(name);
+        when(product.getTaxes()).thenReturn(BigDecimal.ONE);
+        when(product.getTaxedPrice()).thenReturn(BigDecimal.TEN);
+        return product;
     }
 }

@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class TaxableProductTest {
+class TaxableProductTest {
 
     private static final String PRODUCT_NAME = "productName";
     private static final BigDecimal TWO = BigDecimal.valueOf(2L);
-    private final ITaxingStrategy voidStrategy = (value) -> BigDecimal.ZERO;
+    private static final ITaxingStrategy voidStrategy = (value) -> BigDecimal.ZERO;
     private TaxableProduct taxableProduct;
 
     @Test
