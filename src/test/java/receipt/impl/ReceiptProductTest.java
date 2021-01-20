@@ -1,14 +1,15 @@
 package receipt.impl;
 
+import cart.impl.BilledProduct;
 import com.google.common.testing.EqualsTester;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import product.impl.TaxableProduct;
+import receipt.IReceiptProduct;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ReceiptProductTest {
 
@@ -20,8 +21,17 @@ class ReceiptProductTest {
     }
 
     @Test
-    void testFromConstructor() {
-        assertEquals(receiptProduct, ReceiptProduct.from(new TaxableProduct("product", BigDecimal.TEN, (price) -> BigDecimal.ZERO, (price) -> BigDecimal.ZERO), 42));
+    void testThatConstructorsAreGeneratingTheSameObject() {
+        IReceiptProduct productFromStaticConstructor = ReceiptProduct.from(
+                new BilledProduct(
+                        new TaxableProduct("product", BigDecimal.TEN, (price) -> BigDecimal.ZERO, (price) -> BigDecimal.ZERO),
+                        42
+                ));
+        // The following method offered from the Guava library is testing that the two constructors are generating
+        // the same ReceiptProduct using the equals and hashCode methods ensuring that the results are consistent.
+        new EqualsTester()
+                .addEqualityGroup(receiptProduct, productFromStaticConstructor)
+                .testEquals();
     }
 
     @Test
@@ -41,11 +51,8 @@ class ReceiptProductTest {
 
     @Test
     void testEquals() {
-        new EqualsTester()
-                .addEqualityGroup(receiptProduct)
-                .testEquals();
-        assertFalse(receiptProduct.equals(new ReceiptProduct("product2", 42, BigDecimal.valueOf(420L))));
-        assertFalse(receiptProduct.equals(new ReceiptProduct("product", 4242, BigDecimal.valueOf(420L))));
-        assertFalse(receiptProduct.equals(new ReceiptProduct("product", 42, BigDecimal.valueOf(42L))));
+        assertNotEquals(new ReceiptProduct("product2", 42, BigDecimal.valueOf(420L)), receiptProduct);
+        assertNotEquals(new ReceiptProduct("product", 4242, BigDecimal.valueOf(420L)), receiptProduct);
+        assertNotEquals(new ReceiptProduct("product", 42, BigDecimal.valueOf(42L)), receiptProduct);
     }
 }
