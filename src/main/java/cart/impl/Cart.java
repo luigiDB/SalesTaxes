@@ -5,7 +5,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import receipt.IReceipt;
 import product.ITaxableProduct;
+import receipt.IReceiptProduct;
 import receipt.impl.Receipt;
+import receipt.impl.ReceiptProduct;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -34,9 +36,9 @@ public class Cart implements ICart {
 
     @Override
     public IReceipt bill() {
-        List<Triple<String, Integer, BigDecimal>> receiptItems = cart
+        List<IReceiptProduct> receiptItems = cart
                 .stream()
-                .map(item -> Triple.of(item.getLeft().getProduct(), item.getRight(), item.getLeft().getTaxedPrice()))
+                .map(product -> ReceiptProduct.from(product.getLeft(), product.getRight()))
                 .collect(Collectors.toList());
         return new Receipt(receiptItems, total, taxes);
     }

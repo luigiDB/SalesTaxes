@@ -4,6 +4,7 @@ package receipt.impl;
 import org.apache.commons.lang3.tuple.Triple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import receipt.IReceiptProduct;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,15 +15,15 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 
 class ReceiptTest {
 
-    private final Triple<String, Integer, BigDecimal> PRODUCT_1 = Triple.of("product1", 1, BigDecimal.ONE);
-    private final Triple<String, Integer, BigDecimal> PRODUCT_2 = Triple.of("product2", 2, BigDecimal.TEN);
+    private final IReceiptProduct PRODUCT_1 = new ReceiptProduct("product1", 1, BigDecimal.ONE);
+    private final IReceiptProduct PRODUCT_2 = new ReceiptProduct("product2", 2, BigDecimal.TEN);
     private final BigDecimal TOTAL = BigDecimal.valueOf(11L);
     private final BigDecimal TAXES = BigDecimal.ONE;
     private Receipt receipt;
 
     @BeforeEach
     void setUp() {
-        List<Triple<String, Integer, BigDecimal>> cartItems = List.of(
+        List<IReceiptProduct> cartItems = List.of(
                 PRODUCT_1,
                 PRODUCT_2
         );

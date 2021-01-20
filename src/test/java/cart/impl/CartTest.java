@@ -15,6 +15,8 @@ import static org.mockito.Mockito.when;
 
 class CartTest {
 
+    private final BigDecimal TWENTY = BigDecimal.valueOf(20L);
+    private final BigDecimal TWO = BigDecimal.valueOf(2L);
     private Cart cart;
 
     @BeforeEach
@@ -28,51 +30,50 @@ class CartTest {
 
         assertThat(BigDecimal.ZERO, comparesEqualTo(bill.getTotal()));
         assertThat(BigDecimal.ZERO, comparesEqualTo(bill.getTaxes()));
-        assertTrue(bill.getCartContent().isEmpty());
+        assertTrue(bill.billedItems().isEmpty());
     }
 
 
     @Test
     void testThatTheBillForOneItemIsCorrectlyEvaluated() {
-        ITaxableProduct product = createTaxableProduct();
+        ITaxableProduct product = createTaxableProduct("product1");
         cart.add(product, 1);
         IReceipt bill = cart.bill();
 
         assertThat(BigDecimal.TEN, comparesEqualTo(bill.getTotal()));
         assertThat(BigDecimal.ONE, comparesEqualTo(bill.getTaxes()));
-        assertFalse(bill.getCartContent().isEmpty());
+        assertFalse(bill.billedItems().isEmpty());
     }
 
-    private ITaxableProduct createTaxableProduct() {
+    private ITaxableProduct createTaxableProduct(String name) {
         ITaxableProduct product = mock(ITaxableProduct.class);
-        when(product.getProduct()).thenReturn("product");
+        when(product.getProduct()).thenReturn(name);
         when(product.getTaxes()).thenReturn(BigDecimal.ONE);
         when(product.getTaxedPrice()).thenReturn(BigDecimal.TEN);
         return product;
     }
 
-
     @Test
     void testThatTheBillForTwoDifferentItemsIsCorrectlyEvaluated() {
-        ITaxableProduct product1 = createTaxableProduct();
+        ITaxableProduct product1 = createTaxableProduct("product1");
         cart.add(product1, 1);
-        ITaxableProduct product2 = createTaxableProduct();
+        ITaxableProduct product2 = createTaxableProduct("product2");
         cart.add(product2, 1);
         IReceipt bill = cart.bill();
 
-        assertThat(BigDecimal.valueOf(20L), comparesEqualTo(bill.getTotal()));
-        assertThat(BigDecimal.valueOf(2L), comparesEqualTo(bill.getTaxes()));
-        assertFalse(bill.getCartContent().isEmpty());
+        assertThat(TWENTY, comparesEqualTo(bill.getTotal()));
+        assertThat(TWO, comparesEqualTo(bill.getTaxes()));
+        assertFalse(bill.billedItems().isEmpty());
     }
 
     @Test
     void testThatTheBillForTwoItemsOfTheSameProductIsCorrectlyEvaluated() {
-        ITaxableProduct product = createTaxableProduct();
+        ITaxableProduct product = createTaxableProduct("product1");
         cart.add(product, 2);
         IReceipt bill = cart.bill();
 
-        assertThat(BigDecimal.valueOf(20L), comparesEqualTo(bill.getTotal()));
-        assertThat(BigDecimal.valueOf(2L), comparesEqualTo(bill.getTaxes()));
-        assertFalse(bill.getCartContent().isEmpty());
+        assertThat(TWENTY, comparesEqualTo(bill.getTotal()));
+        assertThat(TWO, comparesEqualTo(bill.getTaxes()));
+        assertFalse(bill.billedItems().isEmpty());
     }
 }

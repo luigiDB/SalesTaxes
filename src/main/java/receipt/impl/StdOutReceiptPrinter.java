@@ -3,6 +3,7 @@ package receipt.impl;
 import org.apache.commons.lang3.tuple.Triple;
 import receipt.IReceipt;
 import receipt.IReceiptPrinter;
+import receipt.IReceiptProduct;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -15,11 +16,11 @@ public class StdOutReceiptPrinter implements IReceiptPrinter {
 
     @Override
     public void print(IReceipt receipt) {
-        for (Triple<String, Integer, BigDecimal> item: receipt.billedItems()) {
+        for (IReceiptProduct item: receipt.billedItems()) {
             System.out.printf("%d \t%s: \t%s%s",
-                    item.getMiddle(),
-                    item.getLeft(),
-                    formatBigDecimal(item.getRight()),
+                    item.getQuantity(),
+                    item.getProduct(),
+                    formatBigDecimal(item.getPrice()),
                     newLine);
         }
         System.out.printf("Sales Taxes: %s%s",
