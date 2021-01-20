@@ -40,19 +40,24 @@ public class ReceiptProduct implements IReceiptProduct {
         return price;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-
         if (o == null || getClass() != o.getClass()) return false;
 
         ReceiptProduct that = (ReceiptProduct) o;
 
-        return new EqualsBuilder().append(quantity, that.quantity).append(product, that.product).append(price, that.price).isEquals();
+        if (quantity != that.quantity) return false;
+        if (!product.equals(that.product)) return false;
+        return price.compareTo(that.price)==0;
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(product).append(quantity).append(price).toHashCode();
+        int result = product.hashCode();
+        result = 31 * result + quantity;
+        result = 31 * result + price.hashCode();
+        return result;
     }
 }

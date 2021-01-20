@@ -4,14 +4,11 @@ import cart.ICart;
 import org.apache.commons.lang3.tuple.Pair;
 import product.ITaxableProduct;
 import receipt.IReceipt;
-import receipt.IReceiptProduct;
 import receipt.impl.Receipt;
-import receipt.impl.ReceiptProduct;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Cart implements ICart {
 
@@ -35,10 +32,6 @@ public class Cart implements ICart {
 
     @Override
     public IReceipt bill() {
-        List<IReceiptProduct> receiptItems = cart
-                .stream()
-                .map(product -> ReceiptProduct.from(product.getLeft(), product.getRight()))
-                .collect(Collectors.toList());
-        return new Receipt(receiptItems, total, taxes);
+        return new Receipt(cart, total, taxes);
     }
 }
