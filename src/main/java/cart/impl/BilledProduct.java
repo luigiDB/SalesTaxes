@@ -11,6 +11,8 @@ public class BilledProduct implements IBilledProduct {
 
     public BilledProduct(ITaxableProduct product, int quantity) {
         Objects.requireNonNull(product);
+        if(quantity < 0 )
+            throw new UnsupportedOperationException("Quantity must be positive");
         this.product = product;
         this.quantity = quantity;
     }

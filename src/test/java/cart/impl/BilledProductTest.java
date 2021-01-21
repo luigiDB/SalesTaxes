@@ -34,4 +34,11 @@ class BilledProductTest {
             new BilledProduct(null, 10);
         });
     }
+
+    @Test
+    void testThatNegativeQuantitiesAreRejected() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            new BilledProduct(mockProduct, -10);
+        });
+    }
 }

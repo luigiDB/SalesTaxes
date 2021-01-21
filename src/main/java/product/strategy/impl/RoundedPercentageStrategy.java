@@ -18,6 +18,9 @@ public class RoundedPercentageStrategy implements ITaxingStrategy {
 
     @Override
     public BigDecimal getTaxes(BigDecimal price) {
+        Objects.requireNonNull(price);
+        if(price.compareTo(BigDecimal.ZERO) < 0 )
+            throw new UnsupportedOperationException("Only positive values are valid");
         return price.multiply(taxation);
     }
 }

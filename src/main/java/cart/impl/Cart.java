@@ -26,6 +26,8 @@ public class Cart implements ICart {
     @Override
     public void add(ITaxableProduct product, int quantity) {
         Objects.requireNonNull(product);
+        if(quantity < 0 )
+            throw new UnsupportedOperationException("Quantity must be positive");
         cart.add(new BilledProduct(product, quantity));
         BigDecimal decimalQuantity = BigDecimal.valueOf(quantity);
         taxes = taxes.add(product.getTaxes().multiply(decimalQuantity));

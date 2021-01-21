@@ -87,6 +87,13 @@ class CartTest {
         });
     }
 
+    @Test
+    void testThatNegativeQuantitiesAreRejected() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            cart.add(createTaxableProduct("product1"), -2);
+        });
+    }
+
     private ITaxableProduct createTaxableProduct(String name) {
         ITaxableProduct product = mock(ITaxableProduct.class);
         when(product.getProduct()).thenReturn(name);

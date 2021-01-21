@@ -26,16 +26,32 @@ class RoundedPercentageStrategyTest {
     }
 
     @Test
-    void testThatNullInputsAreRejected() {
+    void testThatConstructorNullInputsAreRejected() {
         assertThrows(NullPointerException.class, () -> {
             new RoundedPercentageStrategy(null);
         });
     }
 
     @Test
-    void testThatNegativeTaxesAreRejected() {
+    void testThatConstructorNegativeInputsAreRejected() {
         assertThrows(UnsupportedOperationException.class, () -> {
-            new RoundedPercentageStrategy(BigDecimal.ONE.negate());
+            new RoundedPercentageStrategy(TEN.negate());
+        });
+    }
+
+    @Test
+    void testThatTaxesOnNullPricesAreRejected() {
+        RoundedPercentageStrategy taxingStrategy = new RoundedPercentageStrategy(TEN);
+        assertThrows(NullPointerException.class, () -> {
+            taxingStrategy.getTaxes(null);
+        });
+    }
+
+    @Test
+    void testThatTaxesOnNegativePricesAreRejected() {
+        RoundedPercentageStrategy taxingStrategy = new RoundedPercentageStrategy(TEN);
+        assertThrows(UnsupportedOperationException.class, () -> {
+            taxingStrategy.getTaxes(TEN.negate());
         });
     }
 

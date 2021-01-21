@@ -75,6 +75,13 @@ class TaxableProductTest {
         });
     }
 
+    @Test
+    void testThatNegativePricesAreRejected() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            new TaxableProduct(PRODUCT_NAME, BigDecimal.TEN.negate(), voidStrategy, voidStrategy);
+        });
+    }
+
     static Stream<Arguments> testTaxes() {
         return Stream.of(
                 arguments(BigDecimal.valueOf(1.00), BigDecimal.valueOf(1.0)),
