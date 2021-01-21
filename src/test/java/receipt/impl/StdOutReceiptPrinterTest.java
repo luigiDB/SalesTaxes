@@ -3,7 +3,6 @@ package receipt.impl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import product.impl.TaxableProduct;
 import receipt.IReceipt;
 
 import java.io.ByteArrayOutputStream;

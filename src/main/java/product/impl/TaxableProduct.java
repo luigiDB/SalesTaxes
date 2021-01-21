@@ -20,7 +20,7 @@ public class TaxableProduct implements ITaxableProduct {
         Objects.requireNonNull(price);
         Objects.requireNonNull(taxingStrategy);
         Objects.requireNonNull(importTaxStrategy);
-        if(price.compareTo(BigDecimal.ZERO) < 0 )
+        if (price.compareTo(BigDecimal.ZERO) < 0)
             throw new UnsupportedOperationException("Only positive values are valid");
         this.product = product;
         this.price = price;
