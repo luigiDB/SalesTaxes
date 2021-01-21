@@ -4,13 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import product.ITaxableProduct;
 import receipt.IReceipt;
+import receipt.impl.ReceiptProduct;
 
 import java.math.BigDecimal;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.comparesEqualTo;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -42,7 +43,10 @@ class CartTest {
 
         assertThat(BigDecimal.TEN, comparesEqualTo(bill.getTotal()));
         assertThat(BigDecimal.ONE, comparesEqualTo(bill.getTaxes()));
-        assertFalse(bill.billedItems().isEmpty());
+        assertEquals(1, bill.billedItems().size());
+        assertThat(bill.billedItems(), containsInAnyOrder(
+                new ReceiptProduct("product1", 1, BigDecimal.TEN)
+        ));
     }
 
     @Test
@@ -55,7 +59,11 @@ class CartTest {
 
         assertThat(TWENTY, comparesEqualTo(bill.getTotal()));
         assertThat(TWO, comparesEqualTo(bill.getTaxes()));
-        assertFalse(bill.billedItems().isEmpty());
+        assertEquals(2, bill.billedItems().size());
+        assertThat(bill.billedItems(), containsInAnyOrder(
+                new ReceiptProduct("product1", 1, BigDecimal.TEN),
+                new ReceiptProduct("product2", 1, BigDecimal.TEN)
+        ));
     }
 
     @Test
@@ -66,7 +74,10 @@ class CartTest {
 
         assertThat(TWENTY, comparesEqualTo(bill.getTotal()));
         assertThat(TWO, comparesEqualTo(bill.getTaxes()));
-        assertFalse(bill.billedItems().isEmpty());
+        assertEquals(1, bill.billedItems().size());
+        assertThat(bill.billedItems(), containsInAnyOrder(
+                new ReceiptProduct("product1", 2, BigDecimal.valueOf(20L))
+        ));
     }
 
     private ITaxableProduct createTaxableProduct(String name) {
