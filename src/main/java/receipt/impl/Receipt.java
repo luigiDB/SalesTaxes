@@ -6,6 +6,7 @@ import receipt.IReceiptProduct;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Receipt implements IReceipt {
@@ -14,6 +15,9 @@ public class Receipt implements IReceipt {
     private final BigDecimal taxes;
 
     public Receipt(List<IBilledProduct> items, BigDecimal total, BigDecimal taxes) {
+        Objects.requireNonNull(items);
+        Objects.requireNonNull(total);
+        Objects.requireNonNull(taxes);
         this.cartProducts = items
                 .stream()
                 .map(ReceiptProduct::from)

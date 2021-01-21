@@ -5,6 +5,7 @@ import product.strategy.ITaxingStrategy;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public class TaxableProduct implements ITaxableProduct {
     private static final BigDecimal ROUNDING_FACTOR = BigDecimal.valueOf(0.05);
@@ -15,6 +16,10 @@ public class TaxableProduct implements ITaxableProduct {
     private final ITaxingStrategy importTaxStrategy;
 
     public TaxableProduct(String product, BigDecimal price, ITaxingStrategy taxingStrategy, ITaxingStrategy importTaxStrategy) {
+        Objects.requireNonNull(product);
+        Objects.requireNonNull(price);
+        Objects.requireNonNull(taxingStrategy);
+        Objects.requireNonNull(importTaxStrategy);
         this.product = product;
         this.price = price;
         this.taxingStrategy = taxingStrategy;

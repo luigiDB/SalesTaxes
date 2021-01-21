@@ -4,6 +4,7 @@ import cart.IBilledProduct;
 import receipt.IReceiptProduct;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class ReceiptProduct implements IReceiptProduct {
 
@@ -12,12 +13,15 @@ public class ReceiptProduct implements IReceiptProduct {
     private final BigDecimal price;
 
     public static IReceiptProduct from(IBilledProduct product) {
+        Objects.requireNonNull(product);
         return new ReceiptProduct(product.getProduct().getProduct(),
                 product.getQuantity(),
                 product.getProduct().getTaxedPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
     }
 
     public ReceiptProduct(String product, int quantity, BigDecimal price) {
+        Objects.requireNonNull(product);
+        Objects.requireNonNull(price);
         this.product = product;
         this.quantity = quantity;
         this.price = price;

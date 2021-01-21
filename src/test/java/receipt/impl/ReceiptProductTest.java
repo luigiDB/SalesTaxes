@@ -55,4 +55,21 @@ class ReceiptProductTest {
         assertNotEquals(new ReceiptProduct("product", 4242, BigDecimal.valueOf(420L)), receiptProduct);
         assertNotEquals(new ReceiptProduct("product", 42, BigDecimal.valueOf(42L)), receiptProduct);
     }
+
+    @Test
+    void testThatNullInputsAreRejected() {
+        assertThrows(NullPointerException.class, () -> {
+            new ReceiptProduct(null, 42, BigDecimal.valueOf(420L));
+        });
+        assertThrows(NullPointerException.class, () -> {
+            new ReceiptProduct("product", 42, null);
+        });
+        assertThrows(NullPointerException.class, () -> {
+            ReceiptProduct.from(
+                    new BilledProduct(
+                            null,
+                            42
+                    ));
+        });
+    }
 }

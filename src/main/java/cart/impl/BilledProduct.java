@@ -3,11 +3,14 @@ package cart.impl;
 import cart.IBilledProduct;
 import product.ITaxableProduct;
 
+import java.util.Objects;
+
 public class BilledProduct implements IBilledProduct {
     private final ITaxableProduct product;
     private final int quantity;
 
     public BilledProduct(ITaxableProduct product, int quantity) {
+        Objects.requireNonNull(product);
         this.product = product;
         this.quantity = quantity;
     }

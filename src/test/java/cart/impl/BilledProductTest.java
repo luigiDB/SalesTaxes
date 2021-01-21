@@ -27,4 +27,11 @@ class BilledProductTest {
     void getQuantity() {
         assertEquals(42, billedProduct.getQuantity());
     }
+
+    @Test
+    void testThatNullInputsAreRejected() {
+        assertThrows(NullPointerException.class, () -> {
+            new BilledProduct(null, 10);
+        });
+    }
 }

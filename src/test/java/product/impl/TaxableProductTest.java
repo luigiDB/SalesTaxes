@@ -1,5 +1,6 @@
 package product.impl;
 
+import cart.impl.BilledProduct;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 
@@ -55,6 +57,22 @@ class TaxableProductTest {
     void testThatTheTaxRoundingIsCorrect(BigDecimal price, BigDecimal expectedResult) {
         taxableProduct = new TaxableProduct(PRODUCT_NAME, BigDecimal.ZERO, (value) -> price, voidStrategy);
         assertThat(expectedResult, comparesEqualTo(taxableProduct.getTaxes()));
+    }
+
+    @Test
+    void testThatNullInputsAreRejected() {
+        assertThrows(NullPointerException.class, () -> {
+            new TaxableProduct(null, BigDecimal.TEN, voidStrategy, voidStrategy);
+        });
+        assertThrows(NullPointerException.class, () -> {
+            new TaxableProduct(PRODUCT_NAME, null, voidStrategy, voidStrategy);
+        });
+        assertThrows(NullPointerException.class, () -> {
+            new TaxableProduct(PRODUCT_NAME, BigDecimal.TEN, null, voidStrategy);
+        });
+        assertThrows(NullPointerException.class, () -> {
+            new TaxableProduct(PRODUCT_NAME, BigDecimal.TEN, voidStrategy, null);
+        });
     }
 
     static Stream<Arguments> testTaxes() {

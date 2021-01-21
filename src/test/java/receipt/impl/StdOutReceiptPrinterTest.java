@@ -3,6 +3,7 @@ package receipt.impl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import product.impl.TaxableProduct;
 import receipt.IReceipt;
 
 import java.io.ByteArrayOutputStream;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -54,5 +56,12 @@ class StdOutReceiptPrinterTest {
 
         assertEquals(expectedOutput, outContent.toString());
 
+    }
+
+    @Test
+    void testThatNullInputsAreRejected() {
+        assertThrows(NullPointerException.class, () -> {
+            stdOutReceiptPrinter.print(null);
+        });
     }
 }

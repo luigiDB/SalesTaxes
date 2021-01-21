@@ -1,5 +1,6 @@
 package product.strategy.impl;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,6 +10,7 @@ import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.comparesEqualTo;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class RoundedPercentageStrategyTest {
@@ -21,6 +23,20 @@ class RoundedPercentageStrategyTest {
     void testThatTheEvaluatedAreZero(BigDecimal price, BigDecimal taxingPercentage, BigDecimal expectedResult) {
         RoundedPercentageStrategy taxingStrategy = new RoundedPercentageStrategy(taxingPercentage);
         assertThat(expectedResult, comparesEqualTo(taxingStrategy.getTaxes(price)));
+    }
+
+    @Test
+    void testThatNullInputsAreRejected() {
+        assertThrows(NullPointerException.class, () -> {
+            new RoundedPercentageStrategy(null);
+        });
+    }
+
+    @Test
+    void testThatNegativeTaxesAreRejected() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            new RoundedPercentageStrategy(BigDecimal.ONE.negate());
+        });
     }
 
     static Stream<Arguments> inputs() {

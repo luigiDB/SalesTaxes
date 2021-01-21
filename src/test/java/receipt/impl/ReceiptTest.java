@@ -8,10 +8,12 @@ import org.junit.jupiter.api.Test;
 import product.ITaxableProduct;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.comparesEqualTo;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -42,6 +44,19 @@ class ReceiptTest {
     void testThatAllProductsAndQuantitiesArePresent() {
         assertTrue(receipt.billedItems().contains(new ReceiptProduct("product1", 1, BigDecimal.ONE)));
         assertTrue(receipt.billedItems().contains(new ReceiptProduct("product2", 2, BigDecimal.valueOf(2L))));
+    }
+
+    @Test
+    void testThatNullInputsAreRejected() {
+        assertThrows(NullPointerException.class, () -> {
+            new Receipt(null, TOTAL, TAXES);
+        });
+        assertThrows(NullPointerException.class, () -> {
+            new Receipt(Collections.EMPTY_LIST, null, TAXES);
+        });
+        assertThrows(NullPointerException.class, () -> {
+            new Receipt(Collections.EMPTY_LIST, TOTAL, null);
+        });
     }
 
     @Test

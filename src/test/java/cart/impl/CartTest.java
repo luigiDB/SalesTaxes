@@ -80,6 +80,13 @@ class CartTest {
         ));
     }
 
+    @Test
+    void testAddingANullObjectIsRejected() {
+        assertThrows(NullPointerException.class, () -> {
+            cart.add(null, 2);
+        });
+    }
+
     private ITaxableProduct createTaxableProduct(String name) {
         ITaxableProduct product = mock(ITaxableProduct.class);
         when(product.getProduct()).thenReturn(name);

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.Objects;
 
 public class StdOutReceiptPrinter implements IReceiptPrinter {
 
@@ -15,6 +16,7 @@ public class StdOutReceiptPrinter implements IReceiptPrinter {
 
     @Override
     public void print(IReceipt receipt) {
+        Objects.requireNonNull(receipt);
         for (IReceiptProduct item : receipt.billedItems()) {
             System.out.printf("%d \t%s: \t%s%s",
                     item.getQuantity(),

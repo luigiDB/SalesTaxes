@@ -9,6 +9,7 @@ import receipt.impl.Receipt;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Cart implements ICart {
 
@@ -24,6 +25,7 @@ public class Cart implements ICart {
 
     @Override
     public void add(ITaxableProduct product, int quantity) {
+        Objects.requireNonNull(product);
         cart.add(new BilledProduct(product, quantity));
         BigDecimal decimalQuantity = BigDecimal.valueOf(quantity);
         taxes = taxes.add(product.getTaxes().multiply(decimalQuantity));
