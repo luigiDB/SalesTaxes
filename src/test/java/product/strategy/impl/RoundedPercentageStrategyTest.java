@@ -27,13 +27,13 @@ class RoundedPercentageStrategyTest {
         return Stream.of(
                 arguments(BigDecimal.valueOf(10.00), TEN, BigDecimal.valueOf(1.0)),
                 arguments(BigDecimal.valueOf(10.00), FIVE, BigDecimal.valueOf(0.5)),
-                arguments(BigDecimal.valueOf(14.99), TEN, BigDecimal.valueOf(1.50)),
+                arguments(BigDecimal.valueOf(14.99), TEN, BigDecimal.valueOf(1.4990)),
                 arguments(BigDecimal.valueOf(47.50), TEN, BigDecimal.valueOf(4.75)),
-                arguments(BigDecimal.valueOf(47.50), FIVE, BigDecimal.valueOf(2.40)),
-                arguments(BigDecimal.valueOf(27.99), TEN, BigDecimal.valueOf(2.80)),
-                arguments(BigDecimal.valueOf(27.99), FIVE, BigDecimal.valueOf(1.40)),
-                arguments(BigDecimal.valueOf(18.99), TEN, BigDecimal.valueOf(1.90)),
-                arguments(BigDecimal.valueOf(11.25), FIVE, BigDecimal.valueOf(0.60))
+                arguments(BigDecimal.valueOf(47.50), FIVE, BigDecimal.valueOf(2.375)),
+                arguments(BigDecimal.valueOf(27.99), TEN, BigDecimal.valueOf(2.7990)),
+                arguments(BigDecimal.valueOf(27.99), FIVE, BigDecimal.valueOf(1.3995)),
+                arguments(BigDecimal.valueOf(18.99), TEN, BigDecimal.valueOf(1.8990)),
+                arguments(BigDecimal.valueOf(11.25), FIVE, BigDecimal.valueOf(0.5625))
         );
     }
 }

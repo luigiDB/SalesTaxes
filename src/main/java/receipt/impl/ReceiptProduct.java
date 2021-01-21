@@ -55,7 +55,7 @@ public class ReceiptProduct implements IReceiptProduct {
     public int hashCode() {
         int result = product.hashCode();
         result = 31 * result + quantity;
-        result = 31 * result + price.hashCode();
+        result = 31 * result + price.setScale(2).hashCode();
         return result;
     }
 }

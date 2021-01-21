@@ -4,8 +4,10 @@ import product.ITaxableProduct;
 import product.strategy.ITaxingStrategy;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class TaxableProduct implements ITaxableProduct {
+    private static final BigDecimal ROUNDING_FACTOR = BigDecimal.valueOf(0.05);
 
     private final String product;
     private final BigDecimal price;
@@ -40,6 +42,13 @@ public class TaxableProduct implements ITaxableProduct {
     }
 
     private BigDecimal evaluateTaxes() {
-        return taxingStrategy.getTaxes(price).add(importTaxStrategy.getTaxes(price));
+        return fiveCentRounding(taxingStrategy.getTaxes(price).add(importTaxStrategy.getTaxes(price)));
+    }
+
+    private BigDecimal fiveCentRounding(BigDecimal value) {
+        return value
+                .divide(ROUNDING_FACTOR, RoundingMode.UP)
+                .setScale(0, RoundingMode.UP)
+                .multiply(ROUNDING_FACTOR);
     }
 }
