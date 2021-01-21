@@ -89,7 +89,7 @@ class CartTest {
 
     @Test
     void testThatNegativeQuantitiesAreRejected() {
-        assertThrows(UnsupportedOperationException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             cart.add(createTaxableProduct("product1"), -2);
         });
     }

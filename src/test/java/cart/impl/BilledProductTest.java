@@ -38,7 +38,7 @@ class BilledProductTest {
 
     @Test
     void testThatNegativeQuantitiesAreRejected() {
-        assertThrows(UnsupportedOperationException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new BilledProduct(mockProduct, -10);
         });
     }

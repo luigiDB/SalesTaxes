@@ -12,7 +12,7 @@ public class RoundedPercentageStrategy implements ITaxingStrategy {
     public RoundedPercentageStrategy(BigDecimal percentage) {
         Objects.requireNonNull(percentage);
         if (percentage.compareTo(BigDecimal.ZERO) < 0)
-            throw new UnsupportedOperationException("Only positive values are valid");
+            throw new IllegalArgumentException("Only positive values are valid");
         taxation = percentage.scaleByPowerOfTen(-2);
     }
 
@@ -20,7 +20,7 @@ public class RoundedPercentageStrategy implements ITaxingStrategy {
     public BigDecimal getTaxes(BigDecimal price) {
         Objects.requireNonNull(price);
         if (price.compareTo(BigDecimal.ZERO) < 0)
-            throw new UnsupportedOperationException("Only positive values are valid");
+            throw new IllegalArgumentException("Only positive values are valid");
         return price.multiply(taxation);
     }
 }

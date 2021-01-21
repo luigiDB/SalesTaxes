@@ -34,7 +34,7 @@ class RoundedPercentageStrategyTest {
 
     @Test
     void testThatConstructorNegativeInputsAreRejected() {
-        assertThrows(UnsupportedOperationException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new RoundedPercentageStrategy(TEN.negate());
         });
     }
@@ -50,7 +50,7 @@ class RoundedPercentageStrategyTest {
     @Test
     void testThatTaxesOnNegativePricesAreRejected() {
         RoundedPercentageStrategy taxingStrategy = new RoundedPercentageStrategy(TEN);
-        assertThrows(UnsupportedOperationException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             taxingStrategy.getTaxes(TEN.negate());
         });
     }

@@ -76,7 +76,7 @@ class TaxableProductTest {
 
     @Test
     void testThatNegativePricesAreRejected() {
-        assertThrows(UnsupportedOperationException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new TaxableProduct(PRODUCT_NAME, BigDecimal.TEN.negate(), voidStrategy, voidStrategy);
         });
     }
