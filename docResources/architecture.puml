@@ -17,31 +17,32 @@ IReceiptProduct <|-- ReceiptProduct
 IReceipt *-- IReceiptProduct
 ReceiptPrinter <-- IReceiptProduct
 
+IBilledProduct <|-- BilledProduct
+Cart <-- IBilledProduct
+Receipt <-- IBilledProduct
+
+
 interface ITaxableProduct {
-    getProduct()
-    getPrice()
-    getTaxedPrice()
-    gettaxes()
+    String getProduct()
+    BigDecimal getPrice()
+    BigDecimal getTaxedPrice()
+    BigDecimal getTaxes()
 }
 
 class TaxableProduct {
-    String product
-    BigDecimal price
-    ITaxingStrategy taxingStrategy
-    ITaxingStrategy importTaxStrategy
-    getProduct()
-    getPrice()
-    getTaxedPrice()
-    gettaxes()
+    String getProduct()
+    BigDecimal getPrice()
+    BigDecimal getTaxedPrice()
+    BigDecimal getTaxes()
 }
 
 interface ICart {
-    void add(ITaxableProduct, Integer)
+    add(ITaxableProduct, int)
     IReceipt bill()
 }
 
 class Cart {
-    void add(ITaxableProduct, Integer)
+    add(ITaxableProduct, int)
     IReceipt bill()
 }
 
@@ -58,23 +59,23 @@ class Receipt {
 }
 
 interface ITaxingStrategy {
-    getTaxes(BigDecimal)
+    BigDecimal getTaxes(BigDecimal)
 }
 
 class NoTaxStrategy {
-    getTaxes(BigDecimal)
+    BigDecimal getTaxes(BigDecimal)
 }
 
 class RoundedPercentageStrategy {
-    getTaxes(BigDecimal)
+    BigDecimal getTaxes(BigDecimal)
 }
 
 interface IReceiptPrinter {
-    print(IReceipt)
+    void print(IReceipt)
 }
 
 class ReceiptPrinter {
-    print(IReceipt)
+    void print(IReceipt)
 }
 
 interface IReceiptProduct {
@@ -87,6 +88,16 @@ class ReceiptProduct {
     String getProduct()
     int getQuantity()
     BigDecimal getPrice()
+}
+
+interface IBilledProduct {
+    ITaxableProduct getProduct()
+    int getQuantity()
+}
+
+class BilledProduct {
+    ITaxableProduct getProduct()
+    int getQuantity()
 }
 
 @enduml
